@@ -19,9 +19,13 @@ const Home = () => {
   
   const[todos, setTodos] = useState(initialTodos);
 
+  const handleClearTodos = () => {
+    setTodos([]);
+  }
+
   return(
     <>
-      <Header/>
+      <Header handleClearTodos={handleClearTodos}/>
       <ListItems
         todos={todos}
         setTodos={setTodos}

@@ -21,53 +21,57 @@ const ListItems = ({todos, setTodos}) => {
     newTodos.splice(todoIndex,1);
     setTodos(newTodos);
   }
-  return(
-    <SwipeListView 
-      data={todos}
-      renderItem={(data) => {
-        const RowText = data.item.key === swipeRow ? SwipedTodoText : TodoText;
-        return(
-          <ListView
-            underlayColor = {colors.primary}
-            onPress={() => {
 
-            }}
-          >
-            <>
-              <RowText>{data.item.title}</RowText>
-              <TodoDate>{data.item.date}</TodoDate>
-            </>
-          </ListView>
-        )
-      }}
-      renderHiddenItem={(data, rowMap) => {
-        return(
-          <ListViewHidden>
-            <HiddenButton
+  return(
+    <>
+      {todos.length == 0 && <TodoText>Você não tem nenhuma tarefa hoje</TodoText>}
+      {todos.length != 0 && <SwipeListView 
+        data={todos}
+        renderItem={(data) => {
+          const RowText = data.item.key === swipeRow ? SwipedTodoText : TodoText;
+          return(
+            <ListView
+              underlayColor = {colors.primary}
               onPress={() => {
-                handleDeleteTodo(rowMap, data.item.key)}}
+
+              }}
             >
-              <Entypo name='trash' size={25} color={colors.secondary}/>
-            </HiddenButton>
-          </ListViewHidden>
-        )
-      }}
-      leftOpenValue={80}
-      previewRowKey={"1"}
-      previewOpenValue={80}
-      previewOpenDelay={3000}
-      disableLeftSwipe={true}
-      showsVerticalScrollIndicator={false}
-      style={{
-        flex: 1, paddingBottom: 30, marginBottom:40
-      }}
-      onRowOpen={(rowKey) => {
-        setSwipeRow(rowKey);
-      }}
-      onRowClose={() => {
-        setSwipeRow(null);
-      }}
-    />
+              <>
+                <RowText>{data.item.title}</RowText>
+                <TodoDate>{data.item.date}</TodoDate>
+              </>
+            </ListView>
+          )
+        }}
+        renderHiddenItem={(data, rowMap) => {
+          return(
+            <ListViewHidden>
+              <HiddenButton
+                onPress={() => {
+                  handleDeleteTodo(rowMap, data.item.key)}}
+              >
+                <Entypo name='trash' size={25} color={colors.secondary}/>
+              </HiddenButton>
+            </ListViewHidden>
+          )
+        }}
+        leftOpenValue={80}
+        previewRowKey={"1"}
+        previewOpenValue={80}
+        previewOpenDelay={3000}
+        disableLeftSwipe={true}
+        showsVerticalScrollIndicator={false}
+        style={{
+          flex: 1, paddingBottom: 30, marginBottom:40
+        }}
+        onRowOpen={(rowKey) => {
+          setSwipeRow(rowKey);
+        }}
+        onRowClose={() => {
+          setSwipeRow(null);
+        }}
+      />}
+    </>
   );
 }
 export default ListItems;
