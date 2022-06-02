@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Header from './Header';
 import ListItems from './ListItems';
+import InputModal from './InputModal';
 
 const Home = () => {
   const initialTodos = [{
@@ -23,12 +24,21 @@ const Home = () => {
     setTodos([]);
   }
 
+  const[modalVisible, setModalVisible] = useState(false);
+  const[todoInputValue, setTodoInputValue] = useState();
+
   return(
     <>
       <Header handleClearTodos={handleClearTodos}/>
       <ListItems
         todos={todos}
         setTodos={setTodos}
+      />
+      <InputModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        todoInputValue={todoInputValue}
+        setTodoInputValue={setTodoInputValue}
       />
     </>
   );
