@@ -11,7 +11,7 @@ import {
 } from './styles/appStyles'
 import { Entypo } from '@expo/vector-icons'
 
-const ListItems = ({todos, setTodos}) => {
+const ListItems = ({todos, setTodos, handleTriggerEdit}) => {
   
   const[swipeRow, setSwipeRow] = useState(null);
 
@@ -33,7 +33,7 @@ const ListItems = ({todos, setTodos}) => {
             <ListView
               underlayColor = {colors.primary}
               onPress={() => {
-
+                handleTriggerEdit(data.item);
               }}
             >
               <>
